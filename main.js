@@ -41,6 +41,7 @@ function fetchData(){
       // console.log(json.meals[0])
 
       const ingredients = [];
+      const measures = [];
       let mealInstructions;
       let mealImage;
 
@@ -77,6 +78,9 @@ function fetchData(){
             if(info[keys] !== null) {
               if(keys.includes('strIngredient') && info[keys].length !== 0)
                 ingredients.push(info[keys]);
+              if(keys.includes('strMeasure') && info[keys].length !== 0)
+                measures.push(info[keys]);
+
             }
             
           })
@@ -110,7 +114,7 @@ function fetchData(){
       for(let i = 0; i < ingredients.length; i++) {
         console.log(ingredients[i]);
         const ingredient = document.createElement('p');
-        ingredient.innerHTML = ingredients[i];
+        ingredient.innerHTML = `${measures[i]} ${ingredients[i]}`;
         
         
         if(i <= (ingredients.length - 1) / 2) {
