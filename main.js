@@ -30,8 +30,8 @@ console.log('clicked')
     </div>
 </div> */}
 
-function fetchData(){
-  fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+function fetchData(typeSearch){
+  fetch(typeSearch)
   .then(function(response){
     return response.json();
   })
@@ -140,7 +140,46 @@ function fetchData(){
 
     })
   }
-fetchData();
+fetchData('https://www.themealdb.com/api/json/v1/1/random.php');
+
+
+
+// https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+
+document.getElementById('search-button').onclick = function() {
+  const foodName = document.getElementById('search-box').value;
+
+  const query = 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + foodName;
+
+  // document.getElementById('ingredients-list-1').remove();
+
+  while(document.getElementById('ingredients-list-1').hasChildNodes()) {
+    document.getElementById('ingredients-list-1').removeChild(document.getElementById('ingredients-list-1').lastChild);
+  }
+  while(document.getElementById('ingredients-list-2').hasChildNodes()) {
+    document.getElementById('ingredients-list-2').removeChild(document.getElementById('ingredients-list-2').lastChild);
+  }
+
+  document.getElementById('recipe-image-div').removeChild(document.getElementById('recipe-image-div').lastChild)
+
+  console.log(query);
+
+  fetchData(query);
+}
+
+document.getElementById('random-button').onclick = function() {
+
+  while(document.getElementById('ingredients-list-1').hasChildNodes()) {
+    document.getElementById('ingredients-list-1').removeChild(document.getElementById('ingredients-list-1').lastChild);
+  }
+  while(document.getElementById('ingredients-list-2').hasChildNodes()) {
+    document.getElementById('ingredients-list-2').removeChild(document.getElementById('ingredients-list-2').lastChild);
+  }
+
+  document.getElementById('recipe-image-div').removeChild(document.getElementById('recipe-image-div').lastChild)
+
+  fetchData('https://www.themealdb.com/api/json/v1/1/random.php');
+}
 
 
 
